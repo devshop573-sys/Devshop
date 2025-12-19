@@ -17,7 +17,7 @@
 }
 *{box-sizing:border-box;font-family:Roboto;margin:0;padding:0}
 
-/* BODY */
+
 body{
   background:
     linear-gradient(270deg, rgba(11,18,32,0.8), rgba(13,15,27,0.8), rgba(27,11,47,0.8), rgba(11,18,32,0.8)),
@@ -33,7 +33,7 @@ body{
   100%{background-position:0 0;}
 }
 
-/* HEADER */
+
 header{
   display:flex;justify-content:space-between;align-items:center;
   padding:20px 40px;
@@ -45,15 +45,15 @@ header h1{color:var(--primary)}
 nav a{margin-left:20px;font-weight:700;cursor:pointer;color:#fff;transition:.3s}
 nav a:hover{color:var(--accent)}
 
-/* SECTION */
+
 section{padding:80px 30px;max-width:1200px;margin:auto}
 h2{text-align:center;margin-bottom:40px;color:var(--primary)}
 
-/* AUTH */
+
 #authSection{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-bottom:50px;}
 .authBox{background:var(--card);padding:30px;border-radius:20px;width:350px}
 
-/* FORM */
+
 form{max-width:400px;margin:auto}
 input,textarea{
   width:100%;padding:14px;margin:10px 0;
@@ -62,7 +62,6 @@ input,textarea{
 input:focus,textarea:focus{background:#252f46;box-shadow:0 0 10px var(--primary)}
 button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
 
-/* PRODUCT CARDS */
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -98,7 +97,7 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
   box-shadow:0 25px 45px var(--shadow);
 }
 
-/* Animated colorful border */
+
 .product::before{
   content:"";
   position:absolute;
@@ -121,7 +120,7 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
   filter: drop-shadow(0 0 10px #facc15) drop-shadow(0 0 15px #38bdf8);
 }
 
-/* CONTENT */
+
 .product img{
   width:100%;
   height:180px;
@@ -160,19 +159,19 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
   transform:scale(1.05);
 }
 
-/* Selected effect */
+
 .product.selected{
   box-shadow: 0 0 40px 8px #facc15;
   transform: scale(1.1) rotateY(0deg) rotateX(0deg);
   border:2px solid #facc15;
 }
 
-/* PAYMENT MODAL */
+
 #paymentModal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;z-index:999}
 .modal{background:var(--card);padding:30px;border-radius:20px;max-width:420px;width:90%;text-align:center}
 .modal img{width:200px;margin-top:15px}
 
-/* CART */
+
 #cartIcon{position:fixed;top:20px;right:20px;background:var(--accent);padding:10px 15px;border-radius:50px;color:#000;font-weight:700;cursor:pointer;z-index:100;display:flex;align-items:center;}
 #cartIcon span{margin-left:5px;font-size:14px;background:#fff;color:#000;padding:2px 6px;border-radius:50%}
 #cartPanel{position:fixed;top:0;right:-400px;width:400px;height:100%;background:var(--card);box-shadow:-5px 0 20px var(--shadow);padding:20px;transition:.4s;z-index:99;overflow-y:auto;}
@@ -200,7 +199,7 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
 </nav>
 </header>
 
-<!-- AUTH -->
+
 <section id="authSection">
 <div class="authBox">
 <h2>Register</h2>
@@ -222,7 +221,7 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
 </div>
 </section>
 
-<!-- HOME -->
+
 <section id="home">
 <h2>Welcome to Dev Cheat Shop</h2>
 <h2 style="text-align:center;color:#cbd5e1;line-height:1.6;">
@@ -234,7 +233,7 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </h2>
 </section>
 
-<!-- PRODUCTS -->
+
 <section id="products">
 <h2>Available Products</h2>
 <div class="products" id="productList"></div>
@@ -243,7 +242,7 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </h2> 
 </section>
 
-<!-- FEEDBACK -->
+
 <section id="feedback">
 <h2>Feedback</h2>
 <form id="feedbackForm">
@@ -254,11 +253,12 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </form>
 </section>
 
-<!-- PAYMENT MODAL -->
+
 <div id="paymentModal">
 <div class="modal">
 <h3>Enter Your Details</h3>
 <form id="customerForm">
+<input name="name" placeholder="Discord ID/NAME" required>
 <input name="name" placeholder="Full Name" required>
 <input name="email" type="email" placeholder="Email" required>
 <input name="phone" placeholder="Phone Number" required>
@@ -281,7 +281,7 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </div>
 </div>
 
-<!-- CART -->
+
 <div id="cartIcon">🛒<span id="cartCount">0</span></div>
 <div id="cartPanel">
 <h2>Your Cart</h2>
@@ -296,7 +296,7 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </div>
 
 <script>
-// AUTH
+
 function logged(){return localStorage.getItem("user")}
 function update(){
 document.getElementById("authSection").style.display=logged()?"none":"flex"
@@ -320,7 +320,6 @@ else alert("Invalid login")
 }
 logout.onclick=()=>{localStorage.removeItem("user");update()}
 
-// PRODUCTS
 const products = [
   { name: "RedEngine (LIFETIME)",price: 220,img: "https://i.im.ge/2025/12/19/B2qnYC.download.png"},
   { name:"Eulen Menu (LIFETIME)", price:350, img:"https://i.im.ge/2025/12/19/B2sTOf.images.jpeg" },
@@ -341,7 +340,7 @@ list.innerHTML+=`
 </div>`
 })
 
-// CART SYSTEM
+
 let cart = []
 const cartIconEl = document.getElementById("cartIcon")
 const cartPanelEl = document.getElementById("cartPanel")
@@ -396,14 +395,14 @@ function openCart(){cartPanelEl.classList.add("active")}
 closeCartBtn.onclick=()=>cartPanelEl.classList.remove("active")
 checkoutBtn.onclick=()=>{cartPanelEl.classList.remove("active");openModal()}
 
-// PRODUCT SELECTION EFFECT
+
 document.querySelectorAll('.product').forEach(card=>{
   card.addEventListener('click', ()=>{
     card.classList.toggle('selected');
   });
 });
 
-// PAYMENT MODAL
+
 const modal=document.getElementById("paymentModal")
 const customerFormEl = document.getElementById("customerForm")
 const paymentOptions = document.getElementById("paymentOptions")
@@ -441,7 +440,7 @@ bankBtn.addEventListener('click', ()=>{ bankDetails.style.display='block'; qrDet
 tngBtn.addEventListener('click', ()=>{ qrDetails.style.display='block'; bankDetails.style.display='none'; });
 closeModalBtn.addEventListener('click', ()=>{ modal.style.display='none'; });
 
-// FEEDBACK FORM
+
 const feedbackForm = document.getElementById('feedbackForm');
 feedbackForm.addEventListener('submit', e=>{
   e.preventDefault();
