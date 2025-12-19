@@ -17,7 +17,6 @@
 }
 *{box-sizing:border-box;font-family:Roboto;margin:0;padding:0}
 
-
 body{
   background:
     linear-gradient(270deg, rgba(11,18,32,0.8), rgba(13,15,27,0.8), rgba(27,11,47,0.8), rgba(11,18,32,0.8)),
@@ -26,13 +25,11 @@ body{
   animation: moveBg 30s linear infinite;
   color: var(--text);
 }
-
 @keyframes moveBg{
   0%{background-position:0 0;}
   50%{background-position:100% 100%;}
   100%{background-position:0 0;}
 }
-
 
 header{
   display:flex;justify-content:space-between;align-items:center;
@@ -45,21 +42,18 @@ header h1{color:var(--primary)}
 nav a{margin-left:20px;font-weight:700;cursor:pointer;color:#fff;transition:.3s}
 nav a:hover{color:var(--accent)}
 
-
 section{padding:80px 30px;max-width:1200px;margin:auto}
 h2{text-align:center;margin-bottom:40px;color:var(--primary)}
-
 
 #authSection{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-bottom:50px;}
 .authBox{background:var(--card);padding:30px;border-radius:20px;width:350px}
 
-
 form{max-width:400px;margin:auto}
-input,textarea{
+input,textarea,select{
   width:100%;padding:14px;margin:10px 0;
   border-radius:10px;border:none;background:#1f2937;color:#fff;font-size:16px
 }
-input:focus,textarea:focus{background:#252f46;box-shadow:0 0 10px var(--primary)}
+input:focus,textarea:focus,select:focus{background:#252f46;box-shadow:0 0 10px var(--primary)}
 button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
 
 .products{
@@ -90,14 +84,10 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
   cursor: pointer;
   perspective: 1000px;
 }
-
-/* 3D hover effect */
 .product:hover{
   transform: rotateY(10deg) rotateX(5deg) scale(1.05);
   box-shadow:0 25px 45px var(--shadow);
 }
-
-
 .product::before{
   content:"";
   position:absolute;
@@ -119,7 +109,6 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
   opacity:1;
   filter: drop-shadow(0 0 10px #facc15) drop-shadow(0 0 15px #38bdf8);
 }
-
 
 .product img{
   width:100%;
@@ -159,29 +148,27 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
   transform:scale(1.05);
 }
 
-
 .product.selected{
   box-shadow: 0 0 40px 8px #facc15;
   transform: scale(1.1) rotateY(0deg) rotateX(0deg);
   border:2px solid #facc15;
 }
 
-
 #paymentModal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;z-index:999}
 .modal{background:var(--card);padding:30px;border-radius:20px;max-width:420px;width:90%;text-align:center}
 .modal img{width:200px;margin-top:15px}
-
 
 #cartIcon{position:fixed;top:20px;right:20px;background:var(--accent);padding:10px 15px;border-radius:50px;color:#000;font-weight:700;cursor:pointer;z-index:100;display:flex;align-items:center;}
 #cartIcon span{margin-left:5px;font-size:14px;background:#fff;color:#000;padding:2px 6px;border-radius:50%}
 #cartPanel{position:fixed;top:0;right:-400px;width:400px;height:100%;background:var(--card);box-shadow:-5px 0 20px var(--shadow);padding:20px;transition:.4s;z-index:99;overflow-y:auto;}
 #cartPanel.active{right:0;}
-.cartItem{display:flex;justify-content:space-between;align-items:center;margin:10px 0;}
+.cartItem{display:flex;justify-content:space-between;align-items:center;margin:10px 0;flex-wrap:wrap;}
 .cartItem img{width:50px;height:50px;object-fit:cover;border-radius:8px;margin-right:10px;}
 .cartItemDetails{flex:1;}
 .cartItemDetails p{margin:3px 0;font-size:14px}
 .cartItemQty{display:flex;align-items:center;gap:5px}
 .cartItemQty input{width:40px;text-align:center}
+.cartItem select{margin-top:5px}
 .cartItem button{background:#ff0055;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;}
 #cartSummary p{margin:10px 0;font-size:14px}
 #cartPanel button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:10px;background:linear-gradient(135deg,#38bdf8,#ff0055);color:#fff;font-weight:700;cursor:pointer;}
@@ -199,7 +186,7 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
 </nav>
 </header>
 
-
+<!-- AUTH SECTION -->
 <section id="authSection">
 <div class="authBox">
 <h2>Register</h2>
@@ -221,7 +208,27 @@ button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointe
 </div>
 </section>
 
+<!-- DISCORD SECTION -->
+<section id="discord" style="padding:60px 30px;text-align:center;background:var(--card);margin:40px auto;border-radius:20px;max-width:800px;">
+  <h2 style="color:#7289da;">Join Our Discord Community</h2>
+  <p style="color:#cbd5e1;margin:10px 0 20px;">
+    Connect with other users, get support, and stay updated with our latest releases.
+  </p>
+  <a href="https://discord.gg/r9dBHvGP" target="_blank" style="
+    display:inline-block;
+    padding:15px 30px;
+    background:#7289da;
+    color:#fff;
+    font-weight:700;
+    border-radius:10px;
+    text-decoration:none;
+    transition:0.3s;
+  " onmouseover="this.style.background='#5b6eae'" onmouseout="this.style.background='#7289da'">
+    Join Discord
+  </a>
+</section>
 
+<!-- HOME SECTION -->
 <section id="home">
 <h2>Welcome to Dev Cheat Shop</h2>
 <h2 style="text-align:center;color:#cbd5e1;line-height:1.6;">
@@ -233,7 +240,7 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </h2>
 </section>
 
-
+<!-- PRODUCTS SECTION -->
 <section id="products">
 <h2>Available Products</h2>
 <div class="products" id="productList"></div>
@@ -242,7 +249,7 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </h2> 
 </section>
 
-
+<!-- FEEDBACK SECTION -->
 <section id="feedback">
 <h2>Feedback</h2>
 <form id="feedbackForm">
@@ -253,18 +260,19 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </form>
 </section>
 
-
+<!-- PAYMENT MODAL -->
 <div id="paymentModal">
 <div class="modal">
 <h3>Enter Your Details</h3>
 <form id="customerForm">
-<input name="name" placeholder="Discord ID/NAME" required>
-<input name="name" placeholder="Full Name" required>
-<input name="email" type="email" placeholder="Email" required>
-<input name="phone" placeholder="Phone Number" required>
-<input type="date" required>
-<input type="time" required>
-<button>Continue</button>
+ <input name="name" placeholder="Full Name" required>
+ <input name="email" type="email" placeholder="Email" required>
+ <input name="phone" placeholder="Phone Number" required>
+ <input type="date" required>
+ <input type="time" required>
+ <input name="discordName" placeholder="Discord Name" required>
+ <input name="discordID" placeholder="Discord ID" required>
+ <button>Continue</button>
 </form>
 <div id="paymentOptions" style="display:none">
 <button id="bankBtn">Bank Transfer</button>
@@ -281,7 +289,7 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </div>
 </div>
 
-
+<!-- CART -->
 <div id="cartIcon">🛒<span id="cartCount">0</span></div>
 <div id="cartPanel">
 <h2>Your Cart</h2>
@@ -296,30 +304,31 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
 </div>
 
 <script>
-
+// ---------------- AUTH ----------------
 function logged(){return localStorage.getItem("user")}
 function update(){
-document.getElementById("authSection").style.display=logged()?"none":"flex"
-document.querySelectorAll("section").forEach(s=>{if(s.id!=="authSection") s.style.display=logged()?"block":"none"})
-document.getElementById("nav").style.display=logged()?"flex":"none"
+  document.getElementById("authSection").style.display=logged()?"none":"flex"
+  document.querySelectorAll("section").forEach(s=>{if(s.id!=="authSection") s.style.display=logged()?"block":"none"})
+  document.getElementById("nav").style.display=logged()?"flex":"none"
 }
 update()
 register.onsubmit=e=>{
-e.preventDefault()
-let users=JSON.parse(localStorage.getItem("users")||"[]")
-users.push({email:remail.value,pass:rpass.value})
-localStorage.setItem("users",JSON.stringify(users))
-alert("Registered! Please login")
+  e.preventDefault()
+  let users=JSON.parse(localStorage.getItem("users")||"[]")
+  users.push({email:remail.value,pass:rpass.value})
+  localStorage.setItem("users",JSON.stringify(users))
+  alert("Registered! Please login")
 }
 login.onsubmit=e=>{
-e.preventDefault()
-let users=JSON.parse(localStorage.getItem("users")||"[]")
-let u=users.find(x=>x.email===lemail.value&&x.pass===lpass.value)
-if(u){localStorage.setItem("user",JSON.stringify(u));update()}
-else alert("Invalid login")
+  e.preventDefault()
+  let users=JSON.parse(localStorage.getItem("users")||"[]")
+  let u=users.find(x=>x.email===lemail.value&&x.pass===lpass.value)
+  if(u){localStorage.setItem("user",JSON.stringify(u));update()}
+  else alert("Invalid login")
 }
 logout.onclick=()=>{localStorage.removeItem("user");update()}
 
+// ---------------- PRODUCTS ----------------
 const products = [
   { name: "RedEngine (LIFETIME)",price: 220,img: "https://i.im.ge/2025/12/19/B2qnYC.download.png"},
   { name:"Eulen Menu (LIFETIME)", price:350, img:"https://i.im.ge/2025/12/19/B2sTOf.images.jpeg" },
@@ -327,20 +336,22 @@ const products = [
   { name:"Keyser Menu (LIFETIME)", price:150, img:"https://i.im.ge/2025/12/19/B2qGsp.download-1.jpeg" },
   { name:"TZ Menu (LIFETIME)", price:220, img:"https://i.im.ge/2025/12/19/B2aQDF.download-3.jpeg" },
   { name:"TZX Menu (LIFETIME)", price:220, img:"https://i.im.ge/2025/12/19/B2aQDF.download-3.jpeg" },
-  { name:"FiveM Private Rockstar Account", price:10, img:"https://i.im.ge/2025/12/19/B2a10Y.download-4.jpeg" }
+  { name:"FiveM Private Rockstar Account", price:10, img:"https://i.im.ge/2025/12/19/B2a10Y.download-4.jpeg" },
+  { name:"LUA ZEYMENU", price:8, img:"https://i.im.ge/2025/12/19/B2yc4L.Screenshot-2025-12-20-003153.png"},
+  { name:"STEAM FRESH", price:1, img:"https://i.im.ge/2025/12/19/B2yHU6.download-7.jpeg"},
 ]
 const list=document.getElementById("productList")
 products.forEach((p,i)=>{
-list.innerHTML+=`
-<div class="product">
-<img src="${p.img}" alt="${p.name}">
-<h3>${p.name}</h3>
-<div class="price">RM ${p.price}</div>
-<button onclick="addToCart(${i})">Add to Cart</button>
-</div>`
+  list.innerHTML+=`
+  <div class="product">
+  <img src="${p.img}" alt="${p.name}">
+  <h3>${p.name}</h3>
+  <div class="price">RM ${p.price}</div>
+  <button onclick="addToCart(${i})">Add to Cart</button>
+  </div>`
 })
 
-
+// ---------------- CART ----------------
 let cart = []
 const cartIconEl = document.getElementById("cartIcon")
 const cartPanelEl = document.getElementById("cartPanel")
@@ -363,9 +374,7 @@ function updateCart(){
   cartItemsEl.innerHTML=""
   let subtotal = 0
   cart.forEach((item,i)=>{
-    subtotal += item.price*item.qty
-    cartItemsEl.innerHTML += `
-    <div class="cartItem">
+    let itemHtml = `<div class="cartItem">
       <img src="${item.img}" alt="${item.name}">
       <div class="cartItemDetails">
         <p>${item.name}</p>
@@ -373,12 +382,27 @@ function updateCart(){
           <button onclick="decreaseQty(${i})">-</button>
           <input type="number" value="${item.qty}" min="1" onchange="changeQty(${i}, this.value)">
           <button onclick="increaseQty(${i})">+</button>
-        </div>
-      </div>
+        </div>`;
+    
+    // LUA ZEYMENU duration dropdown
+    if(item.name === "LUA ZEYMENU"){
+      itemHtml += `<select onchange="changeLuaPrice(${i}, this.value)">
+        <option value="8" ${item.price==8?'selected':''}>1 Day RM 8</option>
+        <option value="15" ${item.price==15?'selected':''}>1 WEEK RM 15</option>
+        <option value="45" ${item.price==45?'selected':''}>1 MONTH RM 45</option>
+        <option value="70" ${item.price==70?'selected':''}>LIFETIME RM 70</option>
+      </select>`;
+    }
+    
+    itemHtml += `</div>
       <p>RM ${item.price*item.qty}</p>
       <button onclick="removeItem(${i})">Remove</button>
-    </div>`
+    </div>`;
+    
+    cartItemsEl.innerHTML += itemHtml
+    subtotal += item.price*item.qty
   })
+  
   const tax = (subtotal*0.06).toFixed(2)
   const total = (subtotal + parseFloat(tax)).toFixed(2)
   subtotalEl.innerText=subtotal
@@ -395,6 +419,11 @@ function openCart(){cartPanelEl.classList.add("active")}
 closeCartBtn.onclick=()=>cartPanelEl.classList.remove("active")
 checkoutBtn.onclick=()=>{cartPanelEl.classList.remove("active");openModal()}
 
+// Change LUA ZEYMENU price
+function changeLuaPrice(i, newPrice){
+  cart[i].price = parseFloat(newPrice)
+  updateCart()
+}
 
 document.querySelectorAll('.product').forEach(card=>{
   card.addEventListener('click', ()=>{
@@ -402,7 +431,7 @@ document.querySelectorAll('.product').forEach(card=>{
   });
 });
 
-
+// ---------------- MODAL ----------------
 const modal=document.getElementById("paymentModal")
 const customerFormEl = document.getElementById("customerForm")
 const paymentOptions = document.getElementById("paymentOptions")
@@ -440,7 +469,7 @@ bankBtn.addEventListener('click', ()=>{ bankDetails.style.display='block'; qrDet
 tngBtn.addEventListener('click', ()=>{ qrDetails.style.display='block'; bankDetails.style.display='none'; });
 closeModalBtn.addEventListener('click', ()=>{ modal.style.display='none'; });
 
-
+// ---------------- FEEDBACK ----------------
 const feedbackForm = document.getElementById('feedbackForm');
 feedbackForm.addEventListener('submit', e=>{
   e.preventDefault();
