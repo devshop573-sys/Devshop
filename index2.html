@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dev Cheat Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#0b1220;
+--card:#141c2f;
+--text:#e5e7eb;
+--primary:#38bdf8;
+--accent:#22c55e;
+--shadow:rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;font-family:Roboto;margin:0;padding:0}
+body{background:var(--bg);color:var(--text)}
+header{
+display:flex;justify-content:space-between;align-items:center;
+padding:20px 40px;border-bottom:1px solid #1f2937;
+position:sticky;top:0;background:var(--bg);z-index:99
+}
+header h1{color:var(--primary)}
+nav a{margin-left:20px;font-weight:700;cursor:pointer}
+section{padding:80px 30px;max-width:1200px;margin:auto}
+h2{text-align:center;margin-bottom:40px;color:var(--primary)}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px
+}
+.product{
+background:var(--card);
+border-radius:18px;
+box-shadow:0 15px 35px var(--shadow);
+overflow:hidden
+}
+.product img{width:100%;height:180px;object-fit:cover}
+.product h3{margin:15px}
+.price{color:var(--accent);margin:0 15px;font-weight:700}
+.product button{
+margin:15px;width:calc(100% - 30px);
+padding:14px;border:none;border-radius:12px;
+background:linear-gradient(135deg,#38bdf8,#2563eb);
+color:#fff;font-weight:700;cursor:pointer
+}
+
+form{max-width:400px;margin:auto}
+input,textarea{
+width:100%;padding:14px;margin:10px 0;
+border-radius:10px;border:none;background:#1f2937;color:#fff
+}
+button{padding:14px;border-radius:10px;border:none;font-weight:700}
+
+#authSection{
+display:flex;gap:40px;justify-content:center;flex-wrap:wrap
+}
+.authBox{
+background:var(--card);padding:30px;border-radius:20px;width:350px
+}
+
+#paymentModal{
+position:fixed;inset:0;background:rgba(0,0,0,.85);
+display:none;justify-content:center;align-items:center
+}
+.modal{
+background:var(--card);padding:30px;border-radius:20px;
+max-width:420px;width:90%;text-align:center
+}
+.modal img{width:200px;margin-top:15px}
+.small{font-size:13px;color:#94a3b8;margin-top:30px;text-align:center}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Dev Cheat Shop</h1>
+<nav id="nav">
+<a href="#home">Home</a>
+<a href="#products">Products</a>
+<a href="#feedback">Feedback</a>
+<a id="logout">Logout</a>
+</nav>
+</header>
+
+<!-- AUTH -->
+<section id="authSection">
+<div class="authBox">
+<h2>Register</h2>
+<form id="register">
+<input id="rname" placeholder="Full Name" required>
+<input id="remail" type="email" placeholder="Email" required>
+<input id="rpass" type="password" placeholder="Password" required>
+<button>Register</button>
+</form>
+</div>
+
+<div class="authBox">
+<h2>Login</h2>
+<form id="login">
+<input id="lemail" type="email" placeholder="Email" required>
+<input id="lpass" type="password" placeholder="Password" required>
+<button>Login</button>
+</form>
+</div>
+</section>
+
+<!-- HOME -->
+<section id="home">
+<h2>Welcome to Dev Cheat Shop</h2>
+<p style="text-align:center;color:#cbd5e1">
+Premium digital tools for FiveM & Rockstar platforms.<br>
+Secure checkout • Fast response • Trusted seller
+</p>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+<h2>Available Products</h2>
+<div class="products" id="productList"></div>
+
+<p class="small">
+Products are sold for educational, testing, and development purposes only.<br>
+Buyers are responsible for their own usage.
+</p>
+</section>
+
+<!-- FEEDBACK -->
+<section id="feedback">
+<h2>Feedback</h2>
+<form id="feedbackForm">
+<input name="name" placeholder="Your Name" required>
+<input name="email" type="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+<button>Submit</button>
+</form>
+</section>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal">
+<div class="modal">
+<h3>Enter Your Details</h3>
+<form id="customerForm">
+<input name="name" placeholder="Full Name" required>
+<input name="email" type="email" placeholder="Email" required>
+<input name="phone" placeholder="Phone Number" required>
+<input type="date" required>
+<input type="time" required>
+<button>Continue</button>
+</form>
+
+<div id="payOptions" style="display:none">
+<button id="bankBtn">Bank Transfer</button>
+<button id="qrBtn">TNG QR</button>
+
+<div id="bank" style="display:none">
+<p>HLB BANK</p>
+<p><b>01250779180</b></p>
+</div>
+
+<div id="qr" style="display:none">
+<img src="https://i.im.ge/2025/12/19/B2o4XP.Screenshot-2025-12-19-203536.png">
+</div>
+</div>
+
+<button onclick="closeModal()" style="margin-top:15px">Close</button>
+</div>
+</div>
+
+<script>
+// AUTH
+function logged(){return localStorage.getItem("user")}
+function update(){
+document.getElementById("authSection").style.display=logged()?"none":"flex"
+document.querySelectorAll("section").forEach(s=>{
+if(s.id!=="authSection") s.style.display=logged()?"block":"none"
+})
+document.getElementById("nav").style.display=logged()?"flex":"none"
+}
+update()
+
+register.onsubmit=e=>{
+e.preventDefault()
+let users=JSON.parse(localStorage.getItem("users")||"[]")
+users.push({email:remail.value,pass:rpass.value})
+localStorage.setItem("users",JSON.stringify(users))
+alert("Registered! Please login")
+}
+
+login.onsubmit=e=>{
+e.preventDefault()
+let users=JSON.parse(localStorage.getItem("users")||"[]")
+let u=users.find(x=>x.email===lemail.value&&x.pass===lpass.value)
+if(u){localStorage.setItem("user",JSON.stringify(u));update()}
+else alert("Invalid login")
+}
+
+logout.onclick=()=>{localStorage.removeItem("user");update()}
+
+// PRODUCTS
+const products=[
+{name:"RedEngine (FiveM)",price:499},
+{name:"Eulen Menu",price:799},
+{name:"Spoofer Tool",price:299},
+{name:"Keyser Menu",price:599},
+{name:"TZ Menu",price:399},
+{name:"TZX Menu",price:699},
+{name:"FiveM Rockstar Account",price:199}
+]
+
+const list=document.getElementById("productList")
+products.forEach(p=>{
+list.innerHTML+=`
+<div class="product">
+<img src="https://via.placeholder.com/400">
+<h3>${p.name}</h3>
+<div class="price">RM ${p.price}</div>
+<button onclick="openModal()">Buy Now</button>
+</div>`
+})
+
+// MODAL
+const modal=document.getElementById("paymentModal")
+function openModal(){modal.style.display="flex"}
+function closeModal(){modal.style.display="none"}
+
+customerForm.onsubmit=e=>{
+e.preventDefault()
+customerForm.style.display="none"
+payOptions.style.display="block"
+}
+
+bankBtn.onclick=()=>{bank.style.display="block";qr.style.display="none"}
+qrBtn.onclick=()=>{qr.style.display="block";bank.style.display="none"}
+</script>
+
+</body>
+</html>
