@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dev Cheat Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#0b1220;
+--card:#141c2f;
+--text:#e5e7eb;
+--primary:#38bdf8;
+--accent:#22c55e;
+--shadow:rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;font-family:Roboto;margin:0;padding:0}
+
+/* BODY */
+body{
+  background:
+    linear-gradient(270deg, rgba(11,18,32,0.8), rgba(13,15,27,0.8), rgba(27,11,47,0.8), rgba(11,18,32,0.8)),
+    url('https://i.im.ge/2025/12/19/B2U3vT.download-6.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  animation: moveBg 30s linear infinite;
+  color: var(--text);
+}
+
+@keyframes moveBg{
+  0%{background-position:0 0;}
+  50%{background-position:100% 100%;}
+  100%{background-position:0 0;}
+}
+
+/* HEADER */
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 40px;
+  border-bottom:1px solid #1f2937;
+  position:sticky;top:0;background:rgba(11,18,32,0.9);z-index:99;
+  backdrop-filter:blur(10px);
+}
+header h1{color:var(--primary)}
+nav a{margin-left:20px;font-weight:700;cursor:pointer;color:#fff;transition:.3s}
+nav a:hover{color:var(--accent)}
+
+/* SECTION */
+section{padding:80px 30px;max-width:1200px;margin:auto}
+h2{text-align:center;margin-bottom:40px;color:var(--primary)}
+
+/* AUTH */
+#authSection{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-bottom:50px;}
+.authBox{background:var(--card);padding:30px;border-radius:20px;width:350px}
+
+/* FORM */
+form{max-width:400px;margin:auto}
+input,textarea{
+  width:100%;padding:14px;margin:10px 0;
+  border-radius:10px;border:none;background:#1f2937;color:#fff;font-size:16px
+}
+input:focus,textarea:focus{background:#252f46;box-shadow:0 0 10px var(--primary)}
+button{padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+
+/* PRODUCT CARDS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+
+@keyframes float{
+  0% {transform: translateY(0px);}
+  50% {transform: translateY(-10px);}
+  100% {transform: translateY(0px);}
+}
+@keyframes floatLR{
+  0% {transform: translateX(0px);}
+  50% {transform: translateX(8px);}
+  100% {transform: translateX(0px);}
+}
+
+.product{
+  background:var(--card);
+  border-radius:18px;
+  box-shadow:0 15px 35px var(--shadow);
+  overflow:hidden;
+  transition: all 0.4s ease, transform 0.3s;
+  animation: float 4s ease-in-out infinite, floatLR 6s ease-in-out infinite;
+  position: relative;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+/* 3D hover effect */
+.product:hover{
+  transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+  box-shadow:0 25px 45px var(--shadow);
+}
+
+/* Animated colorful border */
+.product::before{
+  content:"";
+  position:absolute;
+  top:-2px; left:-2px; right:-2px; bottom:-2px;
+  border-radius:20px;
+  background: linear-gradient(45deg, #ff0055, #38bdf8, #22c55e, #facc15, #ff0055);
+  background-size: 300% 300%;
+  z-index:0;
+  opacity:0;
+  transition:0.5s;
+  animation: gradientBorder 5s ease infinite;
+}
+@keyframes gradientBorder{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+.product:hover::before{
+  opacity:1;
+  filter: drop-shadow(0 0 10px #facc15) drop-shadow(0 0 15px #38bdf8);
+}
+
+/* CONTENT */
+.product img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:16px 16px 0 0;
+  z-index:1;
+  position:relative;
+}
+.product h3, .price, .product button{
+  position:relative;
+  z-index:1;
+}
+.product h3{
+  margin:15px;
+  font-size:18px;
+  color:#fff;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+}
+.price{
+  color:var(--accent);
+  margin:0 15px;
+  font-weight:700;
+  transition:0.3s;
+}
+.product:hover .price{
+  color:#facc15;
+}
+.product button{
+  margin:15px;width:calc(100% - 30px);padding:14px;
+  border:none;border-radius:12px;
+  background:linear-gradient(135deg,#38bdf8,#2563eb);
+  color:#fff;font-weight:700;transition:.3s;
+}
+.product button:hover{
+  background:linear-gradient(135deg,#2563eb,#22c55e);
+  transform:scale(1.05);
+}
+
+/* Selected effect */
+.product.selected{
+  box-shadow: 0 0 40px 8px #facc15;
+  transform: scale(1.1) rotateY(0deg) rotateX(0deg);
+  border:2px solid #facc15;
+}
+
+/* PAYMENT MODAL */
+#paymentModal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;z-index:999}
+.modal{background:var(--card);padding:30px;border-radius:20px;max-width:420px;width:90%;text-align:center}
+.modal img{width:200px;margin-top:15px}
+
+/* CART */
+#cartIcon{position:fixed;top:20px;right:20px;background:var(--accent);padding:10px 15px;border-radius:50px;color:#000;font-weight:700;cursor:pointer;z-index:100;display:flex;align-items:center;}
+#cartIcon span{margin-left:5px;font-size:14px;background:#fff;color:#000;padding:2px 6px;border-radius:50%}
+#cartPanel{position:fixed;top:0;right:-400px;width:400px;height:100%;background:var(--card);box-shadow:-5px 0 20px var(--shadow);padding:20px;transition:.4s;z-index:99;overflow-y:auto;}
+#cartPanel.active{right:0;}
+.cartItem{display:flex;justify-content:space-between;align-items:center;margin:10px 0;}
+.cartItem img{width:50px;height:50px;object-fit:cover;border-radius:8px;margin-right:10px;}
+.cartItemDetails{flex:1;}
+.cartItemDetails p{margin:3px 0;font-size:14px}
+.cartItemQty{display:flex;align-items:center;gap:5px}
+.cartItemQty input{width:40px;text-align:center}
+.cartItem button{background:#ff0055;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;}
+#cartSummary p{margin:10px 0;font-size:14px}
+#cartPanel button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:10px;background:linear-gradient(135deg,#38bdf8,#ff0055);color:#fff;font-weight:700;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Dev Cheat Shop</h1>
+<nav id="nav">
+<a href="#home">Home</a>
+<a href="#products">Products</a>
+<a href="#feedback">Feedback</a>
+<a id="logout">Logout</a>
+</nav>
+</header>
+
+<!-- AUTH -->
+<section id="authSection">
+<div class="authBox">
+<h2>Register</h2>
+<form id="register">
+<input id="rname" placeholder="Full Name" required>
+<input id="remail" type="email" placeholder="Email" required>
+<input id="rpass" type="password" placeholder="Password" required>
+<button>Register</button>
+</form>
+</div>
+
+<div class="authBox">
+<h2>Login</h2>
+<form id="login">
+<input id="lemail" type="email" placeholder="Email" required>
+<input id="lpass" type="password" placeholder="Password" required>
+<button>Login</button>
+</form>
+</div>
+</section>
+
+<!-- HOME -->
+<section id="home">
+<h2>Welcome to Dev Cheat Shop</h2>
+<h2 style="text-align:center;color:#cbd5e1;line-height:1.6;">
+Dev Cheat Shop offers premium digital tools and advanced software solutions for FiveM & Rockstar platforms.  
+We provide fast, secure, and reliable services to enhance your gaming experience and server management.  
+Enjoy instant access to top-quality scripts, cheats, menus, and private accounts, all designed for maximum efficiency and performance.  
+Our platform guarantees secure payment options, 24/7 customer support, and regular updates to keep your tools up-to-date.  
+Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gaming tools and professional digital solutions.
+</h2>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+<h2>Available Products</h2>
+<div class="products" id="productList"></div>
+<h2> 
+“Premium Digital Tools for FiveM & Rockstar, Trusted Digital Solutions • Secure Payments, Advanced Tools • Fast Service • Reliable Seller, Your One-Stop Digital Tool Marketplace”.
+</h2> 
+</section>
+
+<!-- FEEDBACK -->
+<section id="feedback">
+<h2>Feedback</h2>
+<form id="feedbackForm">
+<input name="name" placeholder="Your Name" required>
+<input name="email" type="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+<button>Submit</button>
+</form>
+</section>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal">
+<div class="modal">
+<h3>Enter Your Details</h3>
+<form id="customerForm">
+<input name="name" placeholder="Full Name" required>
+<input name="email" type="email" placeholder="Email" required>
+<input name="phone" placeholder="Phone Number" required>
+<input type="date" required>
+<input type="time" required>
+<button>Continue</button>
+</form>
+<div id="paymentOptions" style="display:none">
+<button id="bankBtn">Bank Transfer</button>
+<button id="tngBtn">TNG QR</button>
+<div id="bankDetails" style="display:none">
+<p>HLB BANK</p>
+<p><b>01250779180</b></p>
+</div>
+<div id="qrDetails" style="display:none">
+<img src="https://i.im.ge/2025/12/19/B2o4XP.Screenshot-2025-12-19-203536.png">
+</div>
+</div>
+<button id="closeModal" style="margin-top:15px">Close</button>
+</div>
+</div>
+
+<!-- CART -->
+<div id="cartIcon">🛒<span id="cartCount">0</span></div>
+<div id="cartPanel">
+<h2>Your Cart</h2>
+<div id="cartItems"></div>
+<div id="cartSummary">
+<p>Subtotal: RM <span id="subtotal">0</span></p>
+<p>Tax (6%): RM <span id="tax">0</span></p>
+<p><b>Total: RM <span id="total">0</span></b></p>
+</div>
+<button id="checkoutBtn">Checkout</button>
+<button id="closeCart">Close</button>
+</div>
+
+<script>
+// AUTH
+function logged(){return localStorage.getItem("user")}
+function update(){
+document.getElementById("authSection").style.display=logged()?"none":"flex"
+document.querySelectorAll("section").forEach(s=>{if(s.id!=="authSection") s.style.display=logged()?"block":"none"})
+document.getElementById("nav").style.display=logged()?"flex":"none"
+}
+update()
+register.onsubmit=e=>{
+e.preventDefault()
+let users=JSON.parse(localStorage.getItem("users")||"[]")
+users.push({email:remail.value,pass:rpass.value})
+localStorage.setItem("users",JSON.stringify(users))
+alert("Registered! Please login")
+}
+login.onsubmit=e=>{
+e.preventDefault()
+let users=JSON.parse(localStorage.getItem("users")||"[]")
+let u=users.find(x=>x.email===lemail.value&&x.pass===lpass.value)
+if(u){localStorage.setItem("user",JSON.stringify(u));update()}
+else alert("Invalid login")
+}
+logout.onclick=()=>{localStorage.removeItem("user");update()}
+
+// PRODUCTS
+const products = [
+  { name: "RedEngine (LIFETIME)",price: 220,img: "https://i.im.ge/2025/12/19/B2qnYC.download.png"},
+  { name:"Eulen Menu (LIFETIME)", price:350, img:"https://i.im.ge/2025/12/19/B2sTOf.images.jpeg" },
+  { name:"Spoofer Tool (DAY)", price:50, img:"https://i.im.ge/2025/12/19/B2skCL.download-2.jpeg" },
+  { name:"Keyser Menu (LIFETIME)", price:150, img:"https://i.im.ge/2025/12/19/B2qGsp.download-1.jpeg" },
+  { name:"TZ Menu (LIFETIME)", price:220, img:"https://i.im.ge/2025/12/19/B2aQDF.download-3.jpeg" },
+  { name:"TZX Menu (LIFETIME)", price:220, img:"https://i.im.ge/2025/12/19/B2aQDF.download-3.jpeg" },
+  { name:"FiveM Private Rockstar Account", price:10, img:"https://i.im.ge/2025/12/19/B2a10Y.download-4.jpeg" }
+]
+const list=document.getElementById("productList")
+products.forEach((p,i)=>{
+list.innerHTML+=`
+<div class="product">
+<img src="${p.img}" alt="${p.name}">
+<h3>${p.name}</h3>
+<div class="price">RM ${p.price}</div>
+<button onclick="addToCart(${i})">Add to Cart</button>
+</div>`
+})
+
+// CART SYSTEM
+let cart = []
+const cartIconEl = document.getElementById("cartIcon")
+const cartPanelEl = document.getElementById("cartPanel")
+const cartItemsEl = document.getElementById("cartItems")
+const subtotalEl = document.getElementById("subtotal")
+const taxEl = document.getElementById("tax")
+const totalEl = document.getElementById("total")
+const checkoutBtn = document.getElementById("checkoutBtn")
+const closeCartBtn = document.getElementById("closeCart")
+
+function addToCart(index){
+  const product = products[index]
+  const exist = cart.find(i=>i.name===product.name)
+  if(exist){exist.qty +=1}else{cart.push({...product, qty:1})}
+  updateCart()
+  openCart()
+}
+
+function updateCart(){
+  cartItemsEl.innerHTML=""
+  let subtotal = 0
+  cart.forEach((item,i)=>{
+    subtotal += item.price*item.qty
+    cartItemsEl.innerHTML += `
+    <div class="cartItem">
+      <img src="${item.img}" alt="${item.name}">
+      <div class="cartItemDetails">
+        <p>${item.name}</p>
+        <div class="cartItemQty">
+          <button onclick="decreaseQty(${i})">-</button>
+          <input type="number" value="${item.qty}" min="1" onchange="changeQty(${i}, this.value)">
+          <button onclick="increaseQty(${i})">+</button>
+        </div>
+      </div>
+      <p>RM ${item.price*item.qty}</p>
+      <button onclick="removeItem(${i})">Remove</button>
+    </div>`
+  })
+  const tax = (subtotal*0.06).toFixed(2)
+  const total = (subtotal + parseFloat(tax)).toFixed(2)
+  subtotalEl.innerText=subtotal
+  taxEl.innerText=tax
+  totalEl.innerText=total
+  document.getElementById("cartCount").innerText=cart.reduce((a,b)=>a+b.qty,0)
+}
+
+function increaseQty(i){cart[i].qty++;updateCart()}
+function decreaseQty(i){if(cart[i].qty>1){cart[i].qty--;updateCart()}}
+function changeQty(i,v){cart[i].qty=parseInt(v)||1;updateCart()}
+function removeItem(i){cart.splice(i,1);updateCart()}
+function openCart(){cartPanelEl.classList.add("active")}
+closeCartBtn.onclick=()=>cartPanelEl.classList.remove("active")
+checkoutBtn.onclick=()=>{cartPanelEl.classList.remove("active");openModal()}
+
+// PRODUCT SELECTION EFFECT
+document.querySelectorAll('.product').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    card.classList.toggle('selected');
+  });
+});
+
+// PAYMENT MODAL
+const modal=document.getElementById("paymentModal")
+const customerFormEl = document.getElementById("customerForm")
+const paymentOptions = document.getElementById("paymentOptions")
+const bankBtn = document.getElementById("bankBtn")
+const tngBtn = document.getElementById("tngBtn")
+const bankDetails = document.getElementById("bankDetails")
+const qrDetails = document.getElementById("qrDetails")
+const closeModalBtn = document.getElementById("closeModal")
+
+function openModal(){modal.style.display="flex"}
+function closeModal(){modal.style.display="none"}
+
+customerFormEl.addEventListener('submit', e=>{
+  e.preventDefault();
+  const formData = new FormData(customerFormEl);
+  fetch('https://formspree.io/f/xgowvrlv', { 
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(response=>{
+    if(response.ok){
+      alert('Details submitted successfully! Now choose your payment method.');
+      customerFormEl.style.display='none';
+      paymentOptions.style.display='block';
+    } else {
+      alert('Failed to submit details. Please try again.');
+    }
+  }).catch(err=>{
+    alert('Error submitting details.');
+    console.error(err);
+  });
+});
+
+bankBtn.addEventListener('click', ()=>{ bankDetails.style.display='block'; qrDetails.style.display='none'; });
+tngBtn.addEventListener('click', ()=>{ qrDetails.style.display='block'; bankDetails.style.display='none'; });
+closeModalBtn.addEventListener('click', ()=>{ modal.style.display='none'; });
+
+// FEEDBACK FORM
+const feedbackForm = document.getElementById('feedbackForm');
+feedbackForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  const formData = new FormData(feedbackForm);
+  fetch('https://formspree.io/f/xgowvrlv', {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(response=>{
+    if(response.ok){
+      alert('Feedback submitted successfully!');
+      feedbackForm.reset();
+    } else {
+      alert('Failed to submit feedback.');
+    }
+  }).catch(err=>{
+    alert('Error submitting feedback.');
+    console.error(err);
+  });
+});
+</script>
+</body>
+</html>
