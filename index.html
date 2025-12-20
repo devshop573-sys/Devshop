@@ -20,7 +20,7 @@
 body{
   background:
     linear-gradient(270deg, rgba(11,18,32,0.8), rgba(13,15,27,0.8), rgba(27,11,47,0.8), rgba(11,18,32,0.8)),
-    url('https://i.im.ge/2025/12/19/B2U3vT.download-6.jpeg') no-repeat center center fixed;
+    url('back.png') no-repeat center center fixed;
   background-size: cover;
   animation: moveBg 50s linear infinite;
   color: var(--text);
@@ -281,14 +281,14 @@ Join thousands of satisfied users who trust Dev Cheat Shop for cutting-edge gami
  <button>Continue</button>
 </form>
 <div id="paymentOptions" style="display:none">
-<button id="bankBtn">Bank Transfer</button>
+<button id="bankBtn">Bank Transfer Temporary close</button>
 <button id="tngBtn">TNG QR</button>
 <div id="bankDetails" style="display:none">
-<p>HLB BANK</p>
-<p><b>01250779180</b></p>
+<p> </p>
+<p><b> </b></p>
 </div>
 <div id="qrDetails" style="display:none">
-<img src="https://i.im.ge/2025/12/19/B2o4XP.Screenshot-2025-12-19-203536.png">
+<img src="qr.png">
 </div>
 </div>
 <button id="closeModal" style="margin-top:15px">Close</button>
@@ -333,15 +333,15 @@ login.onsubmit=e=>{
 logout.onclick=()=>{localStorage.removeItem("user");update()}
 
 const products = [
-  { name: "RedEngine (LIFETIME)",price: 220,img: "https://imgur.com/a/4bLaMg4"},
-  { name:"Eulen Menu (LIFETIME)", price:350, img:"https://i.im.ge/2025/12/19/B2sTOf.images.jpeg" },
-  { name:"Spoofer Tool (DAY)", price:50, img:"https://i.im.ge/2025/12/19/B2skCL.download-2.jpeg" },
-  { name:"Keyser Menu (LIFETIME)", price:150, img:"https://i.im.ge/2025/12/19/B2qGsp.download-1.jpeg" },
-  { name:"TZ Menu (LIFETIME)", price:220, img:"https://i.im.ge/2025/12/20/Bsa1Ir.download-3.jpeg" },
-  { name:"TZX Menu (LIFETIME)", price:220, img:"https://i.im.ge/2025/12/20/Bsa1Ir.download-3.jpeg" },
-  { name:"FiveM Private Rockstar Account", price:10, img:"https://i.im.ge/2025/12/20/BssDGY.download-4.jpeg" },
-  { name:"LUA ZEYMENU", price:8, img:"https://i.im.ge/2025/12/19/B2yc4L.Screenshot-2025-12-20-003153.png"},
-  { name:"STEAM FRESH", price:5, img:"https://i.im.ge/2025/12/19/B2yHU6.download-7.jpeg"},
+  { name: "RedEngine (LIFETIME)",price: 220,img: "download.png"},
+  { name:"Eulen Menu (LIFETIME)", price:350, img:"eulen.png" },
+  { name:"Spoofer Tool (DAY)", price:50, img:"spoofer.png" },
+  { name:"Keyser Menu (LIFETIME)", price:150, img:"Keyser.png" },
+  { name:"TZ Menu (LIFETIME)", price:220, img:"TZ.png" },
+  { name:"TZX Menu (LIFETIME)", price:220, img:"TZ.png" },
+  { name:"FiveM Private Rockstar Account", price:10, img:"Rockstar.png" },
+  { name:"LUA ZEYMENU", price:8, img:"Zeymenu.png"},
+  { name:"STEAM FRESH", price:5, img:"steam.png"},
 ]
 const list=document.getElementById("productList")
 products.forEach((p,i)=>{
